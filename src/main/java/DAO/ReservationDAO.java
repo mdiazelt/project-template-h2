@@ -19,7 +19,11 @@ public class ReservationDAO {
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
                 int generated_reservation_id = (int) resultSet.getLong(1);
-                return new Reservation(generated_reservation_id, reservation.user_id, reservation.number_guest, reservation.date_reservation);
+                return new Reservation(
+                        generated_reservation_id,
+                        reservation.user_id,
+                        reservation.number_guest,
+                        reservation.date_reservation);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -41,8 +45,7 @@ public class ReservationDAO {
                         resultSet.getInt("reservation_id"),
                         resultSet.getInt("user_id"),
                         resultSet.getInt("number_guest"),
-                        resultSet.getString("date_reservation")
-                );
+                        resultSet.getString("date_reservation"));
                 return reservation;
             }
         } catch (SQLException e){
@@ -59,6 +62,23 @@ public class ReservationDAO {
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Reservation updateReservationById(Reservation reservation, int id) {
+        Connection connection = ConnectionSingleton.getConnection();
+        try {
+            String sql = "update reservation set date_reservation = ? where reservation_id =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, reservation.getDate_reservation());
+            preparedStatement.setInt(2, id);
+
+            preparedStatement.executeUpdate();
+            return getReservationById(id);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

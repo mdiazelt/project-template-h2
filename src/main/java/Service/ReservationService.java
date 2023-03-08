@@ -25,4 +25,11 @@ public class ReservationService {
         }
         return null;
     }
+
+    public Reservation updateReservationById(Reservation reservation, int id) {
+        if (reservation.date_reservation != "" && reservation.date_reservation.length() <= 100) {
+            return reservationDAO.updateReservationById(reservation, id);
+        }
+        return null;
+    }
 }
