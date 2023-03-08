@@ -28,7 +28,7 @@ public class ReservationController {
 
         app.post("/register", this::registerNewUser);
         app.post("/login", this::userLogin);
-        app.get("accounts/{account_id}/reservations", this::getReservationForAccount);
+        //app.get("accounts/{account_id}/reservations", this::getReservationForAccount);
         app.post("/reservations", this::postReservationsHandler);
         app.get("/reservations/{reservation_id}", this::getReservationsByIdHandler);
         app.delete("/reservations/{reservation_id}", this::deleteReservationsHandler);
@@ -36,9 +36,25 @@ public class ReservationController {
 
         return app;
     }
-
-        private void registerNewUser (Context ctx){
+        private void registerNewUser (Context ctx) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper();
+            Account newUser = mapper.readValue(ctx.body(), Account.class);
+            Account addedUser = accountService.createAccount(newUser);
+            if(addedUser != null) {
+                ctx.json(mapper.writeValueAsString(addedUser));
+            }else{
+                ctx.status(400);
+            }
+        }
+        private void userLogin (Context ctx) throws JsonProcessingException{
+            ObjectMapper mapper = new ObjectMapper();
+            Account verifyAccount = mapper.readValue(ctx.body(), Account.class);
+            Account checkedAccount = accountService.login(verifyAccount);
+            if(checkedAccount != null){
+                ctx.json(mapper.writeValueAsString(checkedAccount));
+            }else{
+                ctx.status(401);
+            }
         }
 
         private void postReservationsHandler (Context context) throws JsonProcessingException {
@@ -83,9 +99,10 @@ public class ReservationController {
             }
         }
 
-        private void userLogin (Context context){
-        }
-
-        private void getReservationForAccount (Context context){
-        }
+        /*
+        private void getReservationForAccount (Context ctx) throws JsonProcessingException{
+            int account_id = Integer.parseInt(ctx.pathParam("account_id"));
+            List<Reservation> reservation = reservationService.getReservationByAccount(account_id);
+            ctx.json(messages);
+        }*/
 }

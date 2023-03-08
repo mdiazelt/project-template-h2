@@ -15,7 +15,7 @@ public class AccountService{
         this.accountDAO = accountDAO;
     }
 
-    public Account CreateAccount(Account account) {
+    public Account createAccount(Account account) {
         if(account.getUsername() == null || account.getUsername().isEmpty()){
             return null;
         }
