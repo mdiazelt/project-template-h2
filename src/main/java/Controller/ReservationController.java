@@ -79,7 +79,7 @@ public class ReservationController {
 
         private void deleteReservationsHandler (Context context){
             String id = context.pathParam("reservation_id");
-            Reservation deletedReservation = reservationService.getReservationById(Integer.parseInt(id));
+            Reservation deletedReservation = reservationService.deleteReservationById(Integer.parseInt(id));
             if (deletedReservation != null) {
                 context.json(deletedReservation);
             } else {

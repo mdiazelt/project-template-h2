@@ -4,3 +4,27 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "--h2 is 
 --first, drop your tables (to reset your database for testing)
 --then create your tables
 afdbfdb [42001-214]
+2023-03-08 13:58:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a\000d\000aCREATE TABLE account (\000d\000a    account_id int primary key auto_increment,\000d\000a    username varchar(255) unique[*]"; expected "CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+
+
+CREATE TABLE account (
+    account_id int primary key auto_increment,
+    username varchar(255) unique [42001-214]
+2023-03-08 14:05:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a\000d\000aCREATE TABLE account (\000d\000a    account_id int primary key auto_increment,\000d\000a    username varchar(255) unique[*]"; expected "CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+
+
+CREATE TABLE account (
+    account_id int primary key auto_increment,
+    username varchar(255) unique [42001-214]
+2023-03-08 14:10:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a\000d\000aCREATE TABLE account (\000d\000a    account_id int primary key auto_increment,\000d\000a    username varchar(255) unique[*]"; expected "CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+
+
+CREATE TABLE account (
+    account_id int primary key auto_increment,
+    username varchar(255) unique [42001-214]
+2023-03-08 14:10:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RESERVATION" not found (this database is empty); SQL statement:
+insert into reservation (user_id, number_guest, date_reservation) values (?, ?, ?) [42104-214]

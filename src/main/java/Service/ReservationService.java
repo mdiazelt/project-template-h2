@@ -10,10 +10,10 @@ public class ReservationService {
         reservationDAO = new ReservationDAO();
     }
     public Reservation insertReservation(Reservation reservation) {
-        if (reservation.date_reservation != "" && reservation.date_reservation.length() <= 100) {
+//        if (reservation.date_reservation != "" && reservation.date_reservation.length() <= 100) {
             return reservationDAO.insertReservation(reservation);
-        }
-        return null;
+//        }
+//        return null;
     }
 
     public Reservation getReservationById(int id) {
