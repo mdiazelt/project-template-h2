@@ -13,7 +13,7 @@ public class ReservationDAO {
 
             preparedStatement.setInt(1, reservation.getUser_id());
             preparedStatement.setInt(2, reservation.getNumber_guest());
-            preparedStatement.setString(3, reservation.getDate_reservation());
+            preparedStatement.setDate(3, reservation.getDate_reservation());
 
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -34,7 +34,7 @@ public class ReservationDAO {
     public Reservation getReservationById(int id) {
         Connection connection = ConnectionSingleton.getConnection();
         try {
-            String sql = "select * from reservation where reservation_id =?";
+            String sql = "select * from reservation where reservation_id = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, id);
@@ -45,7 +45,7 @@ public class ReservationDAO {
                         resultSet.getInt("reservation_id"),
                         resultSet.getInt("user_id"),
                         resultSet.getInt("number_guest"),
-                        resultSet.getString("date_reservation"));
+                        resultSet.getDate("date_reservation"));
                 return reservation;
             }
         } catch (SQLException e){
@@ -74,7 +74,7 @@ public class ReservationDAO {
             String sql = "update reservation set date_reservation = ? where reservation_id =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, reservation.getDate_reservation());
+            preparedStatement.setDate(1, reservation.getDate_reservation());
             preparedStatement.setInt(2, id);
 
             preparedStatement.executeUpdate();

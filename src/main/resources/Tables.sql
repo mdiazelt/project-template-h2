@@ -15,6 +15,6 @@ create table reservation (
     reservation_id int primary key auto_increment,
     user_id int,
     number_guest int,
-    date_reservation varChar(100),
+    date_reservation date,
     foreign key (user_id) references account(account_id)
     );

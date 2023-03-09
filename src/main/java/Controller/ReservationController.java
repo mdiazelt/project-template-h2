@@ -67,13 +67,14 @@ public class ReservationController {
                 context.status(400);
             }
         }
-        private void getReservationsByIdHandler (Context context){
-            String id = context.pathParam("reservation_id");
-            Reservation gotReservation = reservationService.getReservationById(Integer.parseInt(id));
+        private void getReservationsByIdHandler (Context context) throws JsonProcessingException {
+            ObjectMapper mapper = new ObjectMapper();
+            int id = Integer.parseInt(context.pathParam("reservation_id"));
+            Reservation gotReservation = reservationService.getReservationById(id);
             if (gotReservation != null) {
-                context.json(gotReservation);
+                context.json(mapper.writeValueAsString(gotReservation));
             } else {
-                context.status(404);
+                context.status();
             }
         }
 
