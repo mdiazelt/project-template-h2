@@ -6,14 +6,15 @@ drop table if exists account;
 
 CREATE TABLE account (
     account_id int primary key auto_increment,
-    username varchar(255) unique;
+    username varchar(255) unique,
     password varchar(255)
 );
 
 
 create table reservation (
     reservation_id int primary key auto_increment,
-    guest_number int,
-    date_reservation varChar(100);
-    foreign key (guest_number) references user(user_id)
+    user_id int,
+    number_guest int,
+    date_reservation varChar(100),
+    foreign key (user_id) references account(account_id)
     );
