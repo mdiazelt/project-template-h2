@@ -1,6 +1,5 @@
 package Controller;
 
-import Service.ReservationService;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -9,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Model.Account;
 import Model.Reservation;
 import Service.AccountService;
+import Service.ReservationService;
 import io.javalin.Javalin;
 import java.io.ObjectStreamException;
 import io.javalin.http.Context;
@@ -30,7 +30,7 @@ public class ReservationController {
         app.post("/login", this::userLogin);
         //app.get("accounts/{account_id}/reservations", this::getReservationForAccount);
         app.post("/reservations", this::postReservationsHandler);
-        app.get("/reservations/{reservation_id}", this::getReservationsByIdHandler);
+        app.get("reservations/{reservation_id}", this::getReservationsByIdHandler);
         app.delete("/reservations/{reservation_id}", this::deleteReservationsHandler);
         app.patch("/reservations/{reservation_id}", this::patchReservationsHandler);
 
